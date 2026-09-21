@@ -206,7 +206,7 @@ body {
 }
 
 /* =====================================================
-   CORAÇÕES - AGORA COLORIDOS DESDE O INÍCIO
+   CORAÇÕES - CORES DIRETO NO SVG
 ===================================================== */
 
 .coracao {
@@ -225,42 +225,18 @@ body {
     width: 100%;
     height: 100%;
     animation: pulsarCoracao 2.5s ease-in-out infinite;
-    transition: filter 0.4s ease, opacity 0.4s ease;
+    transition: filter 0.4s ease;
+    /* ✅ Sem opacity, sem grayscale - cores sempre visíveis */
 }
 
-/* ✅ CORAÇÕES JÁ COLORIDOS - sem grayscale */
-.coracao svg {
-    opacity: 1;
+/* Brilho ao passar o mouse */
+.coracao:hover svg {
+    filter: brightness(1.3);
 }
 
-/* Cores sempre visíveis */
-.coracao.vermelho svg {
-    filter: drop-shadow(0 0 10px rgba(255, 0, 34, 0.7));
-}
-
-.coracao.azul svg {
-    filter: drop-shadow(0 0 12px rgba(80, 150, 255, 0.8));
-}
-
-.coracao.preto svg {
-    filter: drop-shadow(0 0 8px rgba(100, 100, 100, 0.6));
-}
-
-/* Coração aceso (conectado) - brilho mais forte */
-.coracao.aceso.vermelho svg {
-    filter: drop-shadow(0 0 15px rgba(255, 0, 34, 1)) drop-shadow(0 0 25px rgba(255, 0, 34, 0.6)) !important;
-}
-
-.coracao.aceso.azul svg {
-    filter: drop-shadow(0 0 15px rgba(80, 150, 255, 1)) drop-shadow(0 0 25px rgba(80, 150, 255, 0.6)) !important;
-}
-
-.coracao.aceso.preto svg {
-    filter: drop-shadow(0 0 12px rgba(150, 150, 150, 0.9)) drop-shadow(0 0 20px rgba(100, 100, 100, 0.5)) !important;
-}
-
+/* Coração ativo (sendo arrastado) */
 .coracao.ativo svg {
-    filter: brightness(1.3) !important;
+    filter: brightness(1.4);
     transform: scale(1.1);
 }
 
@@ -489,7 +465,7 @@ body {
 }
 
 /* =====================================================
-   RESPONSIVO - CORREÇÃO PARA CELULAR
+   RESPONSIVO
 ===================================================== */
 
 @media(max-width: 1400px) {
@@ -584,37 +560,6 @@ body {
         margin-bottom: 10px;
     }
 
-    /* ✅ CORAÇÕES COLORIDOS NO CELULAR */
-    .coracao svg {
-        opacity: 1 !important;
-        filter: none !important;
-    }
-
-    .coracao.vermelho svg {
-        filter: drop-shadow(0 0 8px rgba(255, 0, 34, 0.8)) !important;
-    }
-
-    .coracao.azul svg {
-        filter: drop-shadow(0 0 10px rgba(80, 150, 255, 0.9)) !important;
-    }
-
-    .coracao.preto svg {
-        filter: drop-shadow(0 0 6px rgba(120, 120, 120, 0.7)) !important;
-    }
-
-    /* Corações acesos - brilho mais forte */
-    .coracao.aceso.vermelho svg {
-        filter: drop-shadow(0 0 15px rgba(255, 0, 34, 1)) !important;
-    }
-
-    .coracao.aceso.azul svg {
-        filter: drop-shadow(0 0 15px rgba(80, 150, 255, 1)) !important;
-    }
-
-    .coracao.aceso.preto svg {
-        filter: drop-shadow(0 0 12px rgba(150, 150, 150, 1)) !important;
-    }
-
     .titulo {
         font-size: 13px;
         letter-spacing: 2px;
@@ -676,108 +621,71 @@ body {
             <line class="linha" id="linha-6-7" x1="73" y1="67" x2="50" y2="85" />
         </svg>
 
-        <div class="coracao vermelho c1" data-index="1" data-x="50" data-y="15">
+        <!-- ============================================
+             3 CORAÇÕES DE CIMA - VERMELHO (COR DIRETO)
+        ============================================= -->
+
+        <div class="coracao c1" data-index="1" data-x="50" data-y="15">
             <svg viewBox="0 0 100 100">
-                <defs>
-                    <radialGradient id="gradVermelho1" cx="40%" cy="35%" r="70%">
-                        <stop offset="0%" stop-color="#ff5566" />
-                        <stop offset="50%" stop-color="#e60023" />
-                        <stop offset="100%" stop-color="#8b0016" />
-                    </radialGradient>
-                </defs>
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="url(#gradVermelho1)" stroke="#ff5566" stroke-width="1.5" />
-                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+                    fill="#e60023" stroke="#ff3b5c" stroke-width="2" />
+                <ellipse cx="33" cy="28" rx="8" ry="12" fill="rgba(255,255,255,0.5)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <div class="coracao vermelho c2" data-index="2" data-x="27" data-y="33">
+        <div class="coracao c2" data-index="2" data-x="27" data-y="33">
             <svg viewBox="0 0 100 100">
-                <defs>
-                    <radialGradient id="gradVermelho2" cx="40%" cy="35%" r="70%">
-                        <stop offset="0%" stop-color="#ff5566" />
-                        <stop offset="50%" stop-color="#e60023" />
-                        <stop offset="100%" stop-color="#8b0016" />
-                    </radialGradient>
-                </defs>
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="url(#gradVermelho2)" stroke="#ff5566" stroke-width="1.5" />
-                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+                    fill="#e60023" stroke="#ff3b5c" stroke-width="2" />
+                <ellipse cx="33" cy="28" rx="8" ry="12" fill="rgba(255,255,255,0.5)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <div class="coracao vermelho c3" data-index="3" data-x="73" data-y="33">
+        <div class="coracao c3" data-index="3" data-x="73" data-y="33">
             <svg viewBox="0 0 100 100">
-                <defs>
-                    <radialGradient id="gradVermelho3" cx="40%" cy="35%" r="70%">
-                        <stop offset="0%" stop-color="#ff5566" />
-                        <stop offset="50%" stop-color="#e60023" />
-                        <stop offset="100%" stop-color="#8b0016" />
-                    </radialGradient>
-                </defs>
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="url(#gradVermelho3)" stroke="#ff5566" stroke-width="1.5" />
-                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+                    fill="#e60023" stroke="#ff3b5c" stroke-width="2" />
+                <ellipse cx="33" cy="28" rx="8" ry="12" fill="rgba(255,255,255,0.5)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <div class="coracao azul c4" data-index="4" data-x="50" data-y="50">
+        <!-- ============================================
+             CORAÇÃO DO CENTRO - AZUL (COR DIRETO)
+        ============================================= -->
+
+        <div class="coracao c4" data-index="4" data-x="50" data-y="50">
             <svg viewBox="0 0 100 100">
-                <defs>
-                    <radialGradient id="gradAzul" cx="40%" cy="35%" r="70%">
-                        <stop offset="0%" stop-color="#7eb8ff" />
-                        <stop offset="40%" stop-color="#3b82f6" />
-                        <stop offset="100%" stop-color="#1e3a8a" />
-                    </radialGradient>
-                </defs>
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="url(#gradAzul)" stroke="#7eb8ff" stroke-width="1.5" />
-                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+                    fill="#3b82f6" stroke="#7eb8ff" stroke-width="2" />
+                <ellipse cx="33" cy="28" rx="8" ry="12" fill="rgba(255,255,255,0.5)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <div class="coracao preto c5" data-index="5" data-x="27" data-y="67">
+        <!-- ============================================
+             3 CORAÇÕES DE BAIXO - PRETO (COR DIRETO)
+        ============================================= -->
+
+        <div class="coracao c5" data-index="5" data-x="27" data-y="67">
             <svg viewBox="0 0 100 100">
-                <defs>
-                    <radialGradient id="gradPreto1" cx="40%" cy="35%" r="70%">
-                        <stop offset="0%" stop-color="#4a4a4a" />
-                        <stop offset="50%" stop-color="#2a2a2a" />
-                        <stop offset="100%" stop-color="#000000" />
-                    </radialGradient>
-                </defs>
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="url(#gradPreto1)" stroke="#666666" stroke-width="1.5" />
-                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.2)" transform="rotate(-25 33 28)" />
+                    fill="#1a1a1a" stroke="#888888" stroke-width="2" />
+                <ellipse cx="33" cy="28" rx="8" ry="12" fill="rgba(255,255,255,0.25)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <div class="coracao preto c6" data-index="6" data-x="73" data-y="67">
+        <div class="coracao c6" data-index="6" data-x="73" data-y="67">
             <svg viewBox="0 0 100 100">
-                <defs>
-                    <radialGradient id="gradPreto2" cx="40%" cy="35%" r="70%">
-                        <stop offset="0%" stop-color="#4a4a4a" />
-                        <stop offset="50%" stop-color="#2a2a2a" />
-                        <stop offset="100%" stop-color="#000000" />
-                    </radialGradient>
-                </defs>
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="url(#gradPreto2)" stroke="#666666" stroke-width="1.5" />
-                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.2)" transform="rotate(-25 33 28)" />
+                    fill="#1a1a1a" stroke="#888888" stroke-width="2" />
+                <ellipse cx="33" cy="28" rx="8" ry="12" fill="rgba(255,255,255,0.25)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <div class="coracao preto c7" data-index="7" data-x="50" data-y="85">
+        <div class="coracao c7" data-index="7" data-x="50" data-y="85">
             <svg viewBox="0 0 100 100">
-                <defs>
-                    <radialGradient id="gradPreto3" cx="40%" cy="35%" r="70%">
-                        <stop offset="0%" stop-color="#4a4a4a" />
-                        <stop offset="50%" stop-color="#2a2a2a" />
-                        <stop offset="100%" stop-color="#000000" />
-                    </radialGradient>
-                </defs>
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="url(#gradPreto3)" stroke="#666666" stroke-width="1.5" />
-                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.2)" transform="rotate(-25 33 28)" />
+                    fill="#1a1a1a" stroke="#888888" stroke-width="2" />
+                <ellipse cx="33" cy="28" rx="8" ry="12" fill="rgba(255,255,255,0.25)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
@@ -912,7 +820,6 @@ body {
         coracaoOrigem = coracao;
         arrastando = true;
         coracao.classList.add('ativo');
-        coracao.classList.add('aceso');
 
         const x1 = parseFloat(coracao.dataset.x);
         const y1 = parseFloat(coracao.dataset.y);
@@ -937,9 +844,7 @@ body {
             const cx = parseFloat(c.dataset.x);
             const cy = parseFloat(c.dataset.y);
             if (estaProximo(pos, { x: cx, y: cy }, 12)) {
-                if (!c.classList.contains('aceso')) {
-                    c.style.filter = 'brightness(1.4)';
-                }
+                c.style.filter = 'brightness(1.5)';
             } else {
                 c.style.filter = '';
             }
@@ -972,8 +877,6 @@ body {
                 const linha = document.getElementById('linha-' + chave);
                 if (linha && !linha.classList.contains('ativa')) {
                     linha.classList.add('ativa');
-                    coracaoOrigem.classList.add('aceso');
-                    coracaoAlvo.classList.add('aceso');
                     conexoesFeitas++;
                     if (conexoesFeitas >= TOTAL_CONEXOES) {
                         setTimeout(function() {
