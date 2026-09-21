@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🖤 Para o meu bebe</title>
+<title>🖤 Desculpa, meu anjo</title>
 
 <style>
 * {
@@ -30,6 +30,96 @@ body {
     position: relative;
     user-select: none;
     -webkit-user-select: none;
+    overflow: hidden;
+}
+
+/* =====================================================
+   LAYOUT PRINCIPAL (FOTO + SÍMBOLO + FOTO)
+===================================================== */
+
+.layout-principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px;
+    z-index: 5;
+}
+
+/* =====================================================
+   FOTOS
+===================================================== */
+
+.foto-container {
+    flex: 0 0 auto;
+    width: 200px;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.foto-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Foto esquerda */
+.foto-esquerda {
+    transform: rotate(-3deg);
+    box-shadow: 
+        0 0 20px rgba(255, 23, 68, 0.5),
+        0 0 40px rgba(255, 23, 68, 0.3),
+        0 8px 30px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(255, 59, 92, 0.7);
+    animation: flutuarFoto 5s ease-in-out infinite;
+}
+
+/* Foto direita */
+.foto-direita {
+    transform: rotate(3deg);
+    box-shadow: 
+        0 0 20px rgba(255, 23, 68, 0.5),
+        0 0 40px rgba(255, 23, 68, 0.3),
+        0 8px 30px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(255, 59, 92, 0.7);
+    animation: flutuarFoto 5s ease-in-out infinite reverse;
+}
+
+@keyframes flutuarFoto {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    50% { transform: rotate(-3deg) translateY(-8px); }
+}
+
+.foto-direita {
+    animation: flutuarFotoDireita 5s ease-in-out infinite;
+}
+
+@keyframes flutuarFotoDireita {
+    0%, 100% { transform: rotate(3deg) translateY(0); }
+    50% { transform: rotate(3deg) translateY(-8px); }
+}
+
+/* Hover nas fotos */
+.foto-container:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 30px rgba(255, 23, 68, 0.8),
+        0 0 60px rgba(255, 23, 68, 0.5),
+        0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.foto-esquerda:hover {
+    transform: rotate(-3deg) scale(1.05);
+}
+
+.foto-direita:hover {
+    transform: rotate(3deg) scale(1.05);
 }
 
 /* =====================================================
@@ -38,9 +128,10 @@ body {
 
 .simbolo-container {
     position: relative;
-    width: min(85vw, 85vh, 550px);
-    height: min(85vw, 85vh, 550px);
+    width: min(80vw, 80vh, 500px);
+    height: min(80vw, 80vh, 500px);
     z-index: 5;
+    flex: 0 0 auto;
     touch-action: none;
 }
 
@@ -56,7 +147,7 @@ body {
     overflow: visible;
 }
 
-/* Linha de preview (enquanto arrasta) */
+/* Linha de preview */
 .linha-preview {
     stroke: #ff8fa3;
     stroke-width: 2;
@@ -115,26 +206,22 @@ body {
     transition: filter 0.4s ease, opacity 0.4s ease;
 }
 
-/* Estado inicial: corações apagados */
 .coracao svg {
     opacity: 0.3;
     filter: grayscale(100%) brightness(0.5);
 }
 
-/* Coração aceso (já conectado) */
 .coracao.aceso svg {
     opacity: 1;
     filter: none !important;
 }
 
-/* Coração ativo (sendo arrastado) */
 .coracao.ativo svg {
     opacity: 1;
     filter: brightness(1.3) !important;
     transform: scale(1.1);
 }
 
-/* Cores quando aceso */
 .coracao.vermelho.aceso svg {
     filter: drop-shadow(0 0 12px rgba(255, 0, 34, 0.9)) !important;
 }
@@ -147,7 +234,6 @@ body {
     filter: drop-shadow(0 0 10px rgba(100, 100, 100, 0.8)) !important;
 }
 
-/* Feedback de conexão inválida */
 .coracao.errado svg {
     animation: tremerCoracao 0.4s ease;
 }
@@ -176,42 +262,12 @@ body {
 .c7 { bottom: 0%; left: 50%; transform: translate(-50%, 0); }
 
 /* =====================================================
-   CONTADOR DE PROGRESSO
-===================================================== */
-
-.contador-progresso {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #ffccd5;
-    font-size: 15px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(255, 0, 34, 0.6);
-    z-index: 50;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 10px 25px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 23, 68, 0.3);
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-}
-
-.contador-progresso .numero {
-    color: #ff3b5c;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-/* =====================================================
-   TEXTO
+   TÍTULO E RODAPÉ
 ===================================================== */
 
 .titulo {
     position: fixed;
-    top: 40px;
+    top: 25px;
     left: 50%;
     transform: translateX(-50%);
     color: #ffccd5;
@@ -222,14 +278,15 @@ body {
     text-shadow: 0 0 15px rgba(255, 0, 34, 0.5);
     z-index: 50;
     text-align: center;
+    white-space: nowrap;
 }
 
 .rodape {
     position: fixed;
-    bottom: 30px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
-    color: rgba(255, 204, 213, 0.5);
+    color: rgba(255, 204, 213, 0.6);
     font-size: 13px;
     letter-spacing: 3px;
     z-index: 50;
@@ -346,26 +403,57 @@ body {
    RESPONSIVO
 ===================================================== */
 
-@media(max-width: 600px) {
+@media(max-width: 900px) {
+    .layout-principal {
+        gap: 10px;
+        padding: 20px;
+    }
+
+    .foto-container {
+        width: 130px;
+        height: 180px;
+    }
+
+    .simbolo-container {
+        width: min(60vw, 60vh, 350px);
+        height: min(60vw, 60vh, 350px);
+    }
+
     .titulo {
-        font-size: 15px;
+        font-size: 16px;
         letter-spacing: 4px;
-        top: 25px;
     }
 
     .rodape {
         font-size: 10px;
+    }
+}
+
+@media(max-width: 600px) {
+    .layout-principal {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .foto-container {
+        width: 180px;
+        height: 220px;
+    }
+
+    .simbolo-container {
+        width: min(80vw, 380px);
+        height: min(80vw, 380px);
+    }
+
+    .titulo {
+        font-size: 14px;
+        letter-spacing: 3px;
+        top: 15px;
+    }
+
+    .rodape {
+        font-size: 9px;
         bottom: 15px;
-    }
-
-    .contador-progresso {
-        font-size: 12px;
-        bottom: 60px;
-        padding: 8px 18px;
-    }
-
-    .contador-progresso .numero {
-        font-size: 15px;
     }
 
     .modal-mensagem-box {
@@ -376,15 +464,6 @@ body {
         font-size: 15px;
         line-height: 1.8;
     }
-
-    .modal-mensagem-heart {
-        font-size: 42px;
-    }
-
-    .modal-mensagem-btn {
-        font-size: 14px;
-        padding: 12px 30px;
-    }
 }
 </style>
 </head>
@@ -392,140 +471,148 @@ body {
 
 <div class="titulo">Para o meu bebê 🖤</div>
 
-<div class="simbolo-container" id="simboloContainer">
+<div class="layout-principal">
 
-    <!-- SVG DE FUNDO COM AS LINHAS -->
-    <svg class="linhas-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <!-- Linha de preview -->
-        <line class="linha-preview" id="linhaPreview" x1="0" y1="0" x2="0" y2="0" />
-
-        <!-- Linhas que o jogador vai desenhar -->
-        <line class="linha" id="linha-1-2" x1="50" y1="15" x2="27" y2="33" />
-        <line class="linha" id="linha-1-3" x1="50" y1="15" x2="73" y2="33" />
-        <line class="linha" id="linha-2-4" x1="27" y1="33" x2="50" y2="50" />
-        <line class="linha" id="linha-3-4" x1="73" y1="33" x2="50" y2="50" />
-        <line class="linha" id="linha-4-5" x1="50" y1="50" x2="27" y2="67" />
-        <line class="linha" id="linha-4-6" x1="50" y1="50" x2="73" y2="67" />
-        <line class="linha" id="linha-5-7" x1="27" y1="67" x2="50" y2="85" />
-        <line class="linha" id="linha-6-7" x1="73" y1="67" x2="50" y2="85" />
-    </svg>
-
-    <!-- 3 CORAÇÕES DE CIMA - VERMELHO -->
-
-    <div class="coracao vermelho c1" data-index="1" data-x="50" data-y="15">
-        <svg viewBox="0 0 100 100">
-            <defs>
-                <radialGradient id="gradVermelho1" cx="40%" cy="35%" r="70%">
-                    <stop offset="0%" stop-color="#ff5566" />
-                    <stop offset="50%" stop-color="#e60023" />
-                    <stop offset="100%" stop-color="#8b0016" />
-                </radialGradient>
-            </defs>
-            <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                fill="url(#gradVermelho1)" stroke="#ff5566" stroke-width="1.5" />
-            <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
-        </svg>
+    <!-- FOTO ESQUERDA -->
+    <div class="foto-container foto-esquerda">
+        <img src="foto-esquerda.jpg" alt="Foto Esquerda">
     </div>
 
-    <div class="coracao vermelho c2" data-index="2" data-x="27" data-y="33">
-        <svg viewBox="0 0 100 100">
-            <defs>
-                <radialGradient id="gradVermelho2" cx="40%" cy="35%" r="70%">
-                    <stop offset="0%" stop-color="#ff5566" />
-                    <stop offset="50%" stop-color="#e60023" />
-                    <stop offset="100%" stop-color="#8b0016" />
-                </radialGradient>
-            </defs>
-            <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                fill="url(#gradVermelho2)" stroke="#ff5566" stroke-width="1.5" />
-            <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+    <!-- SÍMBOLO COM O JOGO -->
+    <div class="simbolo-container" id="simboloContainer">
+
+        <!-- SVG DE FUNDO COM AS LINHAS -->
+        <svg class="linhas-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <line class="linha-preview" id="linhaPreview" x1="0" y1="0" x2="0" y2="0" />
+
+            <line class="linha" id="linha-1-2" x1="50" y1="15" x2="27" y2="33" />
+            <line class="linha" id="linha-1-3" x1="50" y1="15" x2="73" y2="33" />
+            <line class="linha" id="linha-2-4" x1="27" y1="33" x2="50" y2="50" />
+            <line class="linha" id="linha-3-4" x1="73" y1="33" x2="50" y2="50" />
+            <line class="linha" id="linha-4-5" x1="50" y1="50" x2="27" y2="67" />
+            <line class="linha" id="linha-4-6" x1="50" y1="50" x2="73" y2="67" />
+            <line class="linha" id="linha-5-7" x1="27" y1="67" x2="50" y2="85" />
+            <line class="linha" id="linha-6-7" x1="73" y1="67" x2="50" y2="85" />
         </svg>
+
+        <!-- 3 CORAÇÕES DE CIMA - VERMELHO -->
+
+        <div class="coracao vermelho c1" data-index="1" data-x="50" data-y="15">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <radialGradient id="gradVermelho1" cx="40%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#ff5566" />
+                        <stop offset="50%" stop-color="#e60023" />
+                        <stop offset="100%" stop-color="#8b0016" />
+                    </radialGradient>
+                </defs>
+                <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
+                    fill="url(#gradVermelho1)" stroke="#ff5566" stroke-width="1.5" />
+                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+            </svg>
+        </div>
+
+        <div class="coracao vermelho c2" data-index="2" data-x="27" data-y="33">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <radialGradient id="gradVermelho2" cx="40%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#ff5566" />
+                        <stop offset="50%" stop-color="#e60023" />
+                        <stop offset="100%" stop-color="#8b0016" />
+                    </radialGradient>
+                </defs>
+                <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
+                    fill="url(#gradVermelho2)" stroke="#ff5566" stroke-width="1.5" />
+                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+            </svg>
+        </div>
+
+        <div class="coracao vermelho c3" data-index="3" data-x="73" data-y="33">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <radialGradient id="gradVermelho3" cx="40%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#ff5566" />
+                        <stop offset="50%" stop-color="#e60023" />
+                        <stop offset="100%" stop-color="#8b0016" />
+                    </radialGradient>
+                </defs>
+                <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
+                    fill="url(#gradVermelho3)" stroke="#ff5566" stroke-width="1.5" />
+                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+            </svg>
+        </div>
+
+        <!-- CORAÇÃO DO CENTRO - AZUL -->
+
+        <div class="coracao azul c4" data-index="4" data-x="50" data-y="50">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <radialGradient id="gradAzul" cx="40%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#7eb8ff" />
+                        <stop offset="40%" stop-color="#3b82f6" />
+                        <stop offset="100%" stop-color="#1e3a8a" />
+                    </radialGradient>
+                </defs>
+                <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
+                    fill="url(#gradAzul)" stroke="#7eb8ff" stroke-width="1.5" />
+                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
+            </svg>
+        </div>
+
+        <!-- 3 CORAÇÕES DE BAIXO - PRETO -->
+
+        <div class="coracao preto c5" data-index="5" data-x="27" data-y="67">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <radialGradient id="gradPreto1" cx="40%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#3a3a3a" />
+                        <stop offset="50%" stop-color="#1a1a1a" />
+                        <stop offset="100%" stop-color="#000000" />
+                    </radialGradient>
+                </defs>
+                <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
+                    fill="url(#gradPreto1)" stroke="#555555" stroke-width="1.5" />
+                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.15)" transform="rotate(-25 33 28)" />
+            </svg>
+        </div>
+
+        <div class="coracao preto c6" data-index="6" data-x="73" data-y="67">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <radialGradient id="gradPreto2" cx="40%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#3a3a3a" />
+                        <stop offset="50%" stop-color="#1a1a1a" />
+                        <stop offset="100%" stop-color="#000000" />
+                    </radialGradient>
+                </defs>
+                <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
+                    fill="url(#gradPreto2)" stroke="#555555" stroke-width="1.5" />
+                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.15)" transform="rotate(-25 33 28)" />
+            </svg>
+        </div>
+
+        <div class="coracao preto c7" data-index="7" data-x="50" data-y="85">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <radialGradient id="gradPreto3" cx="40%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#3a3a3a" />
+                        <stop offset="50%" stop-color="#1a1a1a" />
+                        <stop offset="100%" stop-color="#000000" />
+                    </radialGradient>
+                </defs>
+                <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
+                    fill="url(#gradPreto3)" stroke="#555555" stroke-width="1.5" />
+                <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.15)" transform="rotate(-25 33 28)" />
+            </svg>
+        </div>
+
     </div>
 
-    <div class="coracao vermelho c3" data-index="3" data-x="73" data-y="33">
-        <svg viewBox="0 0 100 100">
-            <defs>
-                <radialGradient id="gradVermelho3" cx="40%" cy="35%" r="70%">
-                    <stop offset="0%" stop-color="#ff5566" />
-                    <stop offset="50%" stop-color="#e60023" />
-                    <stop offset="100%" stop-color="#8b0016" />
-                </radialGradient>
-            </defs>
-            <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                fill="url(#gradVermelho3)" stroke="#ff5566" stroke-width="1.5" />
-            <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
-        </svg>
+    <!-- FOTO DIREITA -->
+    <div class="foto-container foto-direita">
+        <img src="foto-direita.jpg" alt="Foto Direita">
     </div>
 
-    <!-- CORAÇÃO DO CENTRO - AZUL 💙 -->
-
-    <div class="coracao azul c4" data-index="4" data-x="50" data-y="50">
-        <svg viewBox="0 0 100 100">
-            <defs>
-                <radialGradient id="gradAzul" cx="40%" cy="35%" r="70%">
-                    <stop offset="0%" stop-color="#7eb8ff" />
-                    <stop offset="40%" stop-color="#3b82f6" />
-                    <stop offset="100%" stop-color="#1e3a8a" />
-                </radialGradient>
-            </defs>
-            <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                fill="url(#gradAzul)" stroke="#7eb8ff" stroke-width="1.5" />
-            <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
-        </svg>
-    </div>
-
-    <!-- 3 CORAÇÕES DE BAIXO - PRETO -->
-
-    <div class="coracao preto c5" data-index="5" data-x="27" data-y="67">
-        <svg viewBox="0 0 100 100">
-            <defs>
-                <radialGradient id="gradPreto1" cx="40%" cy="35%" r="70%">
-                    <stop offset="0%" stop-color="#3a3a3a" />
-                    <stop offset="50%" stop-color="#1a1a1a" />
-                    <stop offset="100%" stop-color="#000000" />
-                </radialGradient>
-            </defs>
-            <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                fill="url(#gradPreto1)" stroke="#555555" stroke-width="1.5" />
-            <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.15)" transform="rotate(-25 33 28)" />
-        </svg>
-    </div>
-
-    <div class="coracao preto c6" data-index="6" data-x="73" data-y="67">
-        <svg viewBox="0 0 100 100">
-            <defs>
-                <radialGradient id="gradPreto2" cx="40%" cy="35%" r="70%">
-                    <stop offset="0%" stop-color="#3a3a3a" />
-                    <stop offset="50%" stop-color="#1a1a1a" />
-                    <stop offset="100%" stop-color="#000000" />
-                </radialGradient>
-            </defs>
-            <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                fill="url(#gradPreto2)" stroke="#555555" stroke-width="1.5" />
-            <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.15)" transform="rotate(-25 33 28)" />
-        </svg>
-    </div>
-
-    <div class="coracao preto c7" data-index="7" data-x="50" data-y="85">
-        <svg viewBox="0 0 100 100">
-            <defs>
-                <radialGradient id="gradPreto3" cx="40%" cy="35%" r="70%">
-                    <stop offset="0%" stop-color="#3a3a3a" />
-                    <stop offset="50%" stop-color="#1a1a1a" />
-                    <stop offset="100%" stop-color="#000000" />
-                </radialGradient>
-            </defs>
-            <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                fill="url(#gradPreto3)" stroke="#555555" stroke-width="1.5" />
-            <ellipse cx="33" cy="28" rx="7" ry="11" fill="rgba(255,255,255,0.15)" transform="rotate(-25 33 28)" />
-        </svg>
-    </div>
-
-</div>
-
-<!-- CONTADOR DE PROGRESSO -->
-<div class="contador-progresso" id="contadorProgresso">
-    <span class="numero" id="progressoNumero">0</span> / 8
 </div>
 
 <div class="rodape" id="rodape">arraste de um coração até outro para conectar 🖤</div>
@@ -535,6 +622,8 @@ body {
     <div class="modal-mensagem-box">
         <span class="modal-mensagem-heart">🖤</span>
         <div class="mensagem-texto">
+            Desculpa, meu anjo...
+            <br><br>
             Escreva aqui a sua mensagem...
             <br><br>
             <span class="destaque">Com todo meu amor.</span>
@@ -547,10 +636,6 @@ body {
 (function() {
     'use strict';
 
-    // =====================================================
-    // CONFIGURAÇÃO
-    // =====================================================
-
     const conexoesPermitidas = [
         '1-2', '1-3',
         '2-4', '3-4',
@@ -560,14 +645,8 @@ body {
 
     const TOTAL_CONEXOES = 8;
 
-    // =====================================================
-    // ELEMENTOS
-    // =====================================================
-
     const container = document.getElementById('simboloContainer');
     const coracoes = document.querySelectorAll('.coracao');
-    const progressoNumero = document.getElementById('progressoNumero');
-    const contadorProgresso = document.getElementById('contadorProgresso');
     const rodape = document.getElementById('rodape');
     const modalMensagem = document.getElementById('modalMensagem');
     const fecharMensagem = document.getElementById('fecharMensagem');
@@ -576,10 +655,6 @@ body {
     let conexoesFeitas = 0;
     let coracaoOrigem = null;
     let arrastando = false;
-
-    // =====================================================
-    // FUNÇÕES AUXILIARES
-    // =====================================================
 
     function getPosicaoRelativa(e) {
         const rect = container.getBoundingClientRect();
@@ -613,14 +688,6 @@ body {
         const maior = Math.max(i1, i2);
         return menor + '-' + maior;
     }
-
-    function atualizarProgresso() {
-        progressoNumero.textContent = conexoesFeitas;
-    }
-
-    // =====================================================
-    // SISTEMA DE ARRASTAR
-    // =====================================================
 
     function iniciarArrasto(coracao, e) {
         e.preventDefault();
@@ -700,7 +767,6 @@ body {
                     coracaoAlvo.classList.add('aceso');
 
                     conexoesFeitas++;
-                    atualizarProgresso();
 
                     if (conexoesFeitas >= TOTAL_CONEXOES) {
                         setTimeout(function() {
@@ -722,10 +788,6 @@ body {
         arrastando = false;
     }
 
-    // =====================================================
-    // EVENTOS NOS CORAÇÕES
-    // =====================================================
-
     coracoes.forEach(function(coracao) {
         coracao.addEventListener('mousedown', function(e) {
             iniciarArrasto(this, e);
@@ -740,10 +802,6 @@ body {
     document.addEventListener('mouseup', finalizarArrasto);
     document.addEventListener('touchmove', moverArrasto, { passive: false });
     document.addEventListener('touchend', finalizarArrasto, { passive: false });
-
-    // =====================================================
-    // MODAL
-    // =====================================================
 
     function abrirMensagem() {
         modalMensagem.style.display = 'flex';
@@ -768,14 +826,8 @@ body {
         }
     });
 
-    // =====================================================
-    // INICIALIZAÇÃO
-    // =====================================================
-
-    atualizarProgresso();
-
-    console.log('🖤 Mini-game de conexão iniciado!');
-    console.log('💙 Coração do centro agora é AZUL!');
+    console.log('🖤 Desculpa, meu anjo!');
+    console.log('🔗 Arraste de um coração até outro para conectar!');
 
 })();
 </script>
