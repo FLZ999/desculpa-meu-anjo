@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ✅ BLOQUEIA O MODO ESCURO AUTOMÁTICO -->
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
+
 <title>🖤 Desculpa, meu anjo</title>
 
 <style>
@@ -18,6 +23,11 @@ html, body {
     overflow: hidden;
 }
 
+/* ✅ FORÇA O NAVEGADOR A NÃO APLICAR MODO ESCURO */
+html {
+    color-scheme: only light !important;
+}
+
 body {
     background-color: #6b1a2a;
     background-image: radial-gradient(rgba(0, 0, 0, 0.35) 1px, transparent 1px);
@@ -30,6 +40,15 @@ body {
     position: relative;
     user-select: none;
     -webkit-user-select: none;
+    /* ✅ BLOQUEIA FILTROS DO NAVEGADOR */
+    -webkit-color-scheme: only light;
+    forced-color-adjust: none;
+}
+
+/* ✅ APLICA EM TODOS OS ELEMENTOS */
+*, *::before, *::after {
+    -webkit-color-scheme: only light;
+    forced-color-adjust: none;
 }
 
 /* =====================================================
@@ -206,7 +225,7 @@ body {
 }
 
 /* =====================================================
-   CORAÇÕES - VIVOS E VISÍVEIS NO CELULAR
+   CORAÇÕES - CORES INLINE + FILTRO NEON
 ===================================================== */
 
 .coracao {
@@ -226,9 +245,11 @@ body {
     height: 100%;
     animation: pulsarCoracao 2s ease-in-out infinite;
     transition: filter 0.3s ease;
+    /* ✅ FORÇA CORES */
+    forced-color-adjust: none;
 }
 
-/* ✅ BRILHO NEON nos corações - aplicado por cor */
+/* ✅ NEON VERMELHO */
 .coracao.vermelho svg {
     filter: 
         drop-shadow(0 0 8px #ff1744) 
@@ -236,32 +257,31 @@ body {
         drop-shadow(0 0 24px rgba(255, 23, 68, 0.6));
 }
 
+/* ✅ NEON AZUL */
 .coracao.azul svg {
     filter: 
-        drop-shadow(0 0 8px #3b82f6) 
-        drop-shadow(0 0 16px #3b82f6) 
-        drop-shadow(0 0 24px rgba(59, 130, 246, 0.6));
+        drop-shadow(0 0 8px #2196f3) 
+        drop-shadow(0 0 16px #2196f3) 
+        drop-shadow(0 0 24px rgba(33, 150, 243, 0.6));
 }
 
+/* ✅ NEON CINZA CLARO (para os pretos) */
 .coracao.preto svg {
     filter: 
-        drop-shadow(0 0 8px #888888) 
-        drop-shadow(0 0 16px #555555) 
-        drop-shadow(0 0 24px rgba(136, 136, 136, 0.5));
+        drop-shadow(0 0 8px #bbbbbb) 
+        drop-shadow(0 0 16px #888888) 
+        drop-shadow(0 0 24px rgba(187, 187, 187, 0.5));
 }
 
-/* Hover mais intenso */
 .coracao:hover svg {
-    filter: brightness(1.3) !important;
+    filter: brightness(1.4) !important;
 }
 
-/* Coração ativo (sendo arrastado) */
 .coracao.ativo svg {
-    filter: brightness(1.5) !important;
+    filter: brightness(1.6) !important;
     transform: scale(1.15);
 }
 
-/* Erro */
 .coracao.errado svg {
     animation: tremerCoracao 0.4s ease;
 }
@@ -582,7 +602,12 @@ body {
         margin-bottom: 10px;
     }
 
-    /* ✅ BRILHO NEON MAIS FORTE NO CELULAR */
+    /* ✅ FORÇA AS CORES E BRILHO NO CELULAR */
+    .coracao svg {
+        forced-color-adjust: none !important;
+        -webkit-forced-color-adjust: none !important;
+    }
+
     .coracao.vermelho svg {
         filter: 
             drop-shadow(0 0 6px #ff1744) 
@@ -592,16 +617,16 @@ body {
 
     .coracao.azul svg {
         filter: 
-            drop-shadow(0 0 6px #3b82f6) 
-            drop-shadow(0 0 12px #3b82f6) 
-            drop-shadow(0 0 20px rgba(59, 130, 246, 0.8)) !important;
+            drop-shadow(0 0 6px #2196f3) 
+            drop-shadow(0 0 12px #2196f3) 
+            drop-shadow(0 0 20px rgba(33, 150, 243, 0.8)) !important;
     }
 
     .coracao.preto svg {
         filter: 
-            drop-shadow(0 0 6px #aaaaaa) 
-            drop-shadow(0 0 12px #666666) 
-            drop-shadow(0 0 20px rgba(136, 136, 136, 0.7)) !important;
+            drop-shadow(0 0 6px #cccccc) 
+            drop-shadow(0 0 12px #888888) 
+            drop-shadow(0 0 20px rgba(200, 200, 200, 0.7)) !important;
     }
 
     .titulo {
@@ -665,71 +690,62 @@ body {
             <line class="linha" id="linha-6-7" x1="73" y1="67" x2="50" y2="85" />
         </svg>
 
-        <!-- ============================================
-             3 CORAÇÕES DE CIMA - VERMELHO VIVO
-        ============================================= -->
-
+        <!-- VERMELHOS -->
         <div class="coracao vermelho c1" data-index="1" data-x="50" data-y="15">
-            <svg viewBox="0 0 100 100">
+            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" />
+                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" style="fill: #ff1744 !important;" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.7)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
         <div class="coracao vermelho c2" data-index="2" data-x="27" data-y="33">
-            <svg viewBox="0 0 100 100">
+            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" />
+                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" style="fill: #ff1744 !important;" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.7)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
         <div class="coracao vermelho c3" data-index="3" data-x="73" data-y="33">
-            <svg viewBox="0 0 100 100">
+            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" />
+                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" style="fill: #ff1744 !important;" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.7)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <!-- ============================================
-             CORAÇÃO DO CENTRO - AZUL VIVO
-        ============================================= -->
-
+        <!-- AZUL -->
         <div class="coracao azul c4" data-index="4" data-x="50" data-y="50">
-            <svg viewBox="0 0 100 100">
+            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#2196f3" stroke="#64b5f6" stroke-width="2.5" />
+                    fill="#2196f3" stroke="#64b5f6" stroke-width="2.5" style="fill: #2196f3 !important;" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.7)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <!-- ============================================
-             3 CORAÇÕES DE BAIXO - PRETO VIVO
-        ============================================= -->
-
+        <!-- PRETOS -->
         <div class="coracao preto c5" data-index="5" data-x="27" data-y="67">
-            <svg viewBox="0 0 100 100">
+            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#000000" stroke="#aaaaaa" stroke-width="2.5" />
-                <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.35)" transform="rotate(-25 33 28)" />
+                    fill="#000000" stroke="#cccccc" stroke-width="3" style="fill: #000000 !important;" />
+                <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
         <div class="coracao preto c6" data-index="6" data-x="73" data-y="67">
-            <svg viewBox="0 0 100 100">
+            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#000000" stroke="#aaaaaa" stroke-width="2.5" />
-                <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.35)" transform="rotate(-25 33 28)" />
+                    fill="#000000" stroke="#cccccc" stroke-width="3" style="fill: #000000 !important;" />
+                <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
         <div class="coracao preto c7" data-index="7" data-x="50" data-y="85">
-            <svg viewBox="0 0 100 100">
+            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#000000" stroke="#aaaaaa" stroke-width="2.5" />
-                <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.35)" transform="rotate(-25 33 28)" />
+                    fill="#000000" stroke="#cccccc" stroke-width="3" style="fill: #000000 !important;" />
+                <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
