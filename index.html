@@ -33,18 +33,18 @@ body {
 }
 
 /* =====================================================
-   LAYOUT PRINCIPAL (FOTO + SÍMBOLO + FOTO)
+   LAYOUT PRINCIPAL (FOTOS + SÍMBOLO) - MAIS ESPAÇADO
 ===================================================== */
 
 .layout-principal {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 25px;
     width: 100%;
-    max-width: 1300px;
-    padding: 40px;
+    max-width: 100%;
+    padding: 20px 60px;
     z-index: 5;
+    gap: 60px;
 }
 
 /* =====================================================
@@ -53,12 +53,11 @@ body {
 
 .foto-container {
     flex: 0 0 auto;
-    width: 220px;
-    height: 300px;
-    border-radius: 20px;
+    border-radius: 18px;
     overflow: hidden;
     position: relative;
     transition: all 0.4s ease;
+    cursor: pointer;
 }
 
 .foto-container img {
@@ -66,54 +65,91 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    pointer-events: none;
 }
 
-/* Foto esquerda */
+/* FOTO ESQUERDA 2 (mais afastada) */
+.foto-esquerda2 {
+    width: 180px;
+    height: 250px;
+    transform: rotate(-6deg);
+    box-shadow: 
+        0 0 18px rgba(255, 23, 68, 0.5),
+        0 0 35px rgba(255, 23, 68, 0.3),
+        0 8px 25px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(255, 59, 92, 0.7);
+    animation: flutuarEsq2 5s ease-in-out infinite;
+}
+
+@keyframes flutuarEsq2 {
+    0%, 100% { transform: rotate(-6deg) translateY(0); }
+    50% { transform: rotate(-6deg) translateY(-6px); }
+}
+
+/* FOTO ESQUERDA 1 */
 .foto-esquerda {
+    width: 200px;
+    height: 280px;
     transform: rotate(-3deg);
     box-shadow: 
         0 0 20px rgba(255, 23, 68, 0.5),
         0 0 40px rgba(255, 23, 68, 0.3),
         0 8px 30px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(255, 59, 92, 0.7);
-    animation: flutuarEsquerda 5s ease-in-out infinite;
+    animation: flutuarEsq1 5s ease-in-out infinite;
+    animation-delay: 0.5s;
 }
 
-@keyframes flutuarEsquerda {
+@keyframes flutuarEsq1 {
     0%, 100% { transform: rotate(-3deg) translateY(0); }
     50% { transform: rotate(-3deg) translateY(-8px); }
 }
 
-/* Foto direita */
+/* FOTO DIREITA 1 */
 .foto-direita {
+    width: 200px;
+    height: 280px;
     transform: rotate(3deg);
     box-shadow: 
         0 0 20px rgba(255, 23, 68, 0.5),
         0 0 40px rgba(255, 23, 68, 0.3),
         0 8px 30px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(255, 59, 92, 0.7);
-    animation: flutuarDireita 5s ease-in-out infinite;
+    animation: flutuarDir1 5s ease-in-out infinite;
+    animation-delay: 1s;
 }
 
-@keyframes flutuarDireita {
+@keyframes flutuarDir1 {
     0%, 100% { transform: rotate(3deg) translateY(0); }
     50% { transform: rotate(3deg) translateY(-8px); }
 }
 
-/* Hover nas fotos */
+/* FOTO DIREITA 2 (mais afastada) */
+.foto-direita2 {
+    width: 180px;
+    height: 250px;
+    transform: rotate(6deg);
+    box-shadow: 
+        0 0 18px rgba(255, 23, 68, 0.5),
+        0 0 35px rgba(255, 23, 68, 0.3),
+        0 8px 25px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(255, 59, 92, 0.7);
+    animation: flutuarDir2 5s ease-in-out infinite;
+    animation-delay: 1.5s;
+}
+
+@keyframes flutuarDir2 {
+    0%, 100% { transform: rotate(6deg) translateY(0); }
+    50% { transform: rotate(6deg) translateY(-6px); }
+}
+
+/* HOVER NAS FOTOS */
 .foto-container:hover {
     box-shadow: 
-        0 0 30px rgba(255, 23, 68, 0.8),
-        0 0 60px rgba(255, 23, 68, 0.5),
+        0 0 30px rgba(255, 23, 68, 0.9),
+        0 0 60px rgba(255, 23, 68, 0.6),
         0 8px 30px rgba(0, 0, 0, 0.5);
-}
-
-.foto-esquerda:hover {
-    transform: rotate(-3deg) scale(1.05);
-}
-
-.foto-direita:hover {
-    transform: rotate(3deg) scale(1.05);
+    z-index: 20;
 }
 
 /* =====================================================
@@ -122,8 +158,8 @@ body {
 
 .simbolo-container {
     position: relative;
-    width: min(75vw, 75vh, 480px);
-    height: min(75vw, 75vh, 480px);
+    width: min(45vw, 45vh, 380px);
+    height: min(45vw, 45vh, 380px);
     z-index: 5;
     flex: 0 0 auto;
     touch-action: none;
@@ -288,6 +324,69 @@ body {
 }
 
 /* =====================================================
+   ZOOM DA FOTO (LIGHTBOX)
+===================================================== */
+
+.zoom-foto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 5000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    cursor: zoom-out;
+    animation: fadeIn 0.4s ease;
+}
+
+.zoom-foto.ativo {
+    display: flex;
+}
+
+.zoom-foto img {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    border: 3px solid rgba(255, 59, 92, 0.8);
+    box-shadow: 
+        0 0 40px rgba(255, 23, 68, 0.8),
+        0 0 80px rgba(255, 23, 68, 0.5),
+        0 0 120px rgba(255, 23, 68, 0.3);
+    animation: zoomIn 0.4s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.zoom-foto .fechar-zoom {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    color: #ff3b5c;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 20px rgba(255, 23, 68, 0.8);
+    z-index: 5001;
+    line-height: 1;
+}
+
+.zoom-foto .fechar-zoom:hover {
+    transform: scale(1.2) rotate(90deg);
+    color: white;
+}
+
+/* =====================================================
    MODAL DE MENSAGEM
 ===================================================== */
 
@@ -397,20 +496,58 @@ body {
    RESPONSIVO
 ===================================================== */
 
-@media(max-width: 900px) {
+@media(max-width: 1400px) {
     .layout-principal {
-        gap: 12px;
-        padding: 20px;
+        gap: 40px;
+        padding: 20px 30px;
+    }
+}
+
+@media(max-width: 1200px) {
+    .layout-principal {
+        gap: 30px;
+        padding: 15px 20px;
     }
 
-    .foto-container {
+    .foto-esquerda2,
+    .foto-direita2 {
         width: 140px;
-        height: 190px;
+        height: 200px;
+    }
+
+    .foto-esquerda,
+    .foto-direita {
+        width: 160px;
+        height: 230px;
     }
 
     .simbolo-container {
-        width: min(55vw, 55vh, 340px);
-        height: min(55vw, 55vh, 340px);
+        width: min(40vw, 40vh, 320px);
+        height: min(40vw, 40vh, 320px);
+    }
+}
+
+@media(max-width: 900px) {
+    .layout-principal {
+        gap: 20px;
+        padding: 15px 10px;
+    }
+
+    .foto-esquerda2,
+    .foto-direita2 {
+        width: 90px;
+        height: 140px;
+    }
+
+    .foto-esquerda,
+    .foto-direita {
+        width: 110px;
+        height: 160px;
+    }
+
+    .simbolo-container {
+        width: min(35vw, 35vh, 260px);
+        height: min(35vw, 35vh, 260px);
     }
 
     .titulo {
@@ -425,29 +562,40 @@ body {
 
 @media(max-width: 600px) {
     .layout-principal {
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 15px;
+        justify-content: center;
     }
 
-    .foto-container {
-        width: 160px;
-        height: 200px;
+    .foto-esquerda2,
+    .foto-direita2 {
+        width: 80px;
+        height: 120px;
+    }
+
+    .foto-esquerda,
+    .foto-direita {
+        width: 100px;
+        height: 145px;
     }
 
     .simbolo-container {
-        width: min(80vw, 360px);
-        height: min(80vw, 360px);
+        width: min(75vw, 300px);
+        height: min(75vw, 300px);
+        order: -1;
+        flex-basis: 100%;
+        margin-bottom: 10px;
     }
 
     .titulo {
-        font-size: 14px;
-        letter-spacing: 3px;
-        top: 15px;
+        font-size: 13px;
+        letter-spacing: 2px;
+        top: 12px;
     }
 
     .rodape {
         font-size: 9px;
-        bottom: 15px;
+        bottom: 12px;
     }
 
     .modal-mensagem-box {
@@ -458,6 +606,16 @@ body {
         font-size: 15px;
         line-height: 1.8;
     }
+
+    .zoom-foto {
+        padding: 15px;
+    }
+
+    .zoom-foto .fechar-zoom {
+        font-size: 32px;
+        top: 15px;
+        right: 20px;
+    }
 }
 </style>
 </head>
@@ -467,8 +625,13 @@ body {
 
 <div class="layout-principal">
 
-    <!-- FOTO ESQUERDA -->
-    <div class="foto-container foto-esquerda">
+    <!-- FOTO ESQUERDA 2 (mais afastada) -->
+    <div class="foto-container foto-esquerda2" data-foto="foto-esquerda2.jpg">
+        <img src="foto-esquerda2.jpg" alt="Foto Esquerda 2">
+    </div>
+
+    <!-- FOTO ESQUERDA 1 -->
+    <div class="foto-container foto-esquerda" data-foto="foto-esquerda.jpg">
         <img src="foto-esquerda.jpg" alt="Foto Esquerda">
     </div>
 
@@ -601,14 +764,25 @@ body {
 
     </div>
 
-    <!-- FOTO DIREITA -->
-    <div class="foto-container foto-direita">
+    <!-- FOTO DIREITA 1 -->
+    <div class="foto-container foto-direita" data-foto="foto-direita.jpg">
         <img src="foto-direita.jpg" alt="Foto Direita">
+    </div>
+
+    <!-- FOTO DIREITA 2 (mais afastada) -->
+    <div class="foto-container foto-direita2" data-foto="foto-direita2.jpg">
+        <img src="foto-direita2.jpg" alt="Foto Direita 2">
     </div>
 
 </div>
 
 <div class="rodape" id="rodape">arraste de um coração até outro para conectar 🖤</div>
+
+<!-- ZOOM DA FOTO -->
+<div class="zoom-foto" id="zoomFoto">
+    <span class="fechar-zoom" id="fecharZoom">×</span>
+    <img src="" alt="Foto ampliada" id="fotoAmpliada">
+</div>
 
 <!-- MODAL DA MENSAGEM -->
 <div class="modal-mensagem" id="modalMensagem">
@@ -628,6 +802,50 @@ body {
 <script>
 (function() {
     'use strict';
+
+    // =====================================================
+    // ZOOM NAS FOTOS
+    // =====================================================
+
+    const zoomFoto = document.getElementById('zoomFoto');
+    const fotoAmpliada = document.getElementById('fotoAmpliada');
+    const fecharZoom = document.getElementById('fecharZoom');
+    const fotos = document.querySelectorAll('.foto-container');
+
+    fotos.forEach(function(foto) {
+        foto.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const nomeFoto = this.dataset.foto;
+            fotoAmpliada.src = nomeFoto;
+            zoomFoto.style.display = 'flex';
+            void zoomFoto.offsetWidth;
+            zoomFoto.classList.add('ativo');
+        });
+    });
+
+    function fecharZoomFoto() {
+        zoomFoto.style.animation = 'fadeIn 0.3s ease reverse';
+        setTimeout(function() {
+            zoomFoto.classList.remove('ativo');
+            zoomFoto.style.display = 'none';
+            fotoAmpliada.src = '';
+        }, 300);
+    }
+
+    fecharZoom.addEventListener('click', function(e) {
+        e.stopPropagation();
+        fecharZoomFoto();
+    });
+
+    zoomFoto.addEventListener('click', function(e) {
+        if (e.target === zoomFoto || e.target === fotoAmpliada) {
+            fecharZoomFoto();
+        }
+    });
+
+    // =====================================================
+    // JOGO DOS CORAÇÕES
+    // =====================================================
 
     const conexoesPermitidas = [
         '1-2', '1-3',
