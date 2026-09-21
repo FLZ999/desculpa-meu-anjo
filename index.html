@@ -30,7 +30,6 @@ body {
     position: relative;
     user-select: none;
     -webkit-user-select: none;
-    overflow: hidden;
 }
 
 /* =====================================================
@@ -41,9 +40,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1300px;
     padding: 40px;
     z-index: 5;
 }
@@ -54,8 +53,8 @@ body {
 
 .foto-container {
     flex: 0 0 auto;
-    width: 200px;
-    height: 280px;
+    width: 220px;
+    height: 300px;
     border-radius: 20px;
     overflow: hidden;
     position: relative;
@@ -77,7 +76,12 @@ body {
         0 0 40px rgba(255, 23, 68, 0.3),
         0 8px 30px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(255, 59, 92, 0.7);
-    animation: flutuarFoto 5s ease-in-out infinite;
+    animation: flutuarEsquerda 5s ease-in-out infinite;
+}
+
+@keyframes flutuarEsquerda {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    50% { transform: rotate(-3deg) translateY(-8px); }
 }
 
 /* Foto direita */
@@ -88,26 +92,16 @@ body {
         0 0 40px rgba(255, 23, 68, 0.3),
         0 8px 30px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(255, 59, 92, 0.7);
-    animation: flutuarFoto 5s ease-in-out infinite reverse;
+    animation: flutuarDireita 5s ease-in-out infinite;
 }
 
-@keyframes flutuarFoto {
-    0%, 100% { transform: rotate(-3deg) translateY(0); }
-    50% { transform: rotate(-3deg) translateY(-8px); }
-}
-
-.foto-direita {
-    animation: flutuarFotoDireita 5s ease-in-out infinite;
-}
-
-@keyframes flutuarFotoDireita {
+@keyframes flutuarDireita {
     0%, 100% { transform: rotate(3deg) translateY(0); }
     50% { transform: rotate(3deg) translateY(-8px); }
 }
 
 /* Hover nas fotos */
 .foto-container:hover {
-    transform: scale(1.05);
     box-shadow: 
         0 0 30px rgba(255, 23, 68, 0.8),
         0 0 60px rgba(255, 23, 68, 0.5),
@@ -128,8 +122,8 @@ body {
 
 .simbolo-container {
     position: relative;
-    width: min(80vw, 80vh, 500px);
-    height: min(80vw, 80vh, 500px);
+    width: min(75vw, 75vh, 480px);
+    height: min(75vw, 75vh, 480px);
     z-index: 5;
     flex: 0 0 auto;
     touch-action: none;
@@ -405,18 +399,18 @@ body {
 
 @media(max-width: 900px) {
     .layout-principal {
-        gap: 10px;
+        gap: 12px;
         padding: 20px;
     }
 
     .foto-container {
-        width: 130px;
-        height: 180px;
+        width: 140px;
+        height: 190px;
     }
 
     .simbolo-container {
-        width: min(60vw, 60vh, 350px);
-        height: min(60vw, 60vh, 350px);
+        width: min(55vw, 55vh, 340px);
+        height: min(55vw, 55vh, 340px);
     }
 
     .titulo {
@@ -436,13 +430,13 @@ body {
     }
 
     .foto-container {
-        width: 180px;
-        height: 220px;
+        width: 160px;
+        height: 200px;
     }
 
     .simbolo-container {
-        width: min(80vw, 380px);
-        height: min(80vw, 380px);
+        width: min(80vw, 360px);
+        height: min(80vw, 360px);
     }
 
     .titulo {
@@ -481,7 +475,6 @@ body {
     <!-- SÍMBOLO COM O JOGO -->
     <div class="simbolo-container" id="simboloContainer">
 
-        <!-- SVG DE FUNDO COM AS LINHAS -->
         <svg class="linhas-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
             <line class="linha-preview" id="linhaPreview" x1="0" y1="0" x2="0" y2="0" />
 
@@ -691,10 +684,8 @@ body {
 
     function iniciarArrasto(coracao, e) {
         e.preventDefault();
-
         coracaoOrigem = coracao;
         arrastando = true;
-
         coracao.classList.add('ativo');
         coracao.classList.add('aceso');
 
@@ -710,7 +701,6 @@ body {
 
     function moverArrasto(e) {
         if (!arrastando || !coracaoOrigem) return;
-
         e.preventDefault();
 
         const pos = getPosicaoRelativa(e);
@@ -719,10 +709,8 @@ body {
 
         coracoes.forEach(function(c) {
             if (c === coracaoOrigem) return;
-
             const cx = parseFloat(c.dataset.x);
             const cy = parseFloat(c.dataset.y);
-
             if (estaProximo(pos, { x: cx, y: cy }, 12)) {
                 if (!c.classList.contains('aceso')) {
                     c.style.filter = 'brightness(1.4)';
@@ -735,19 +723,16 @@ body {
 
     function finalizarArrasto(e) {
         if (!arrastando || !coracaoOrigem) return;
-
         e.preventDefault();
 
         const pos = getPosicaoRelativa(e);
-
         let coracaoAlvo = null;
+
         coracoes.forEach(function(c) {
             c.style.filter = '';
             if (c === coracaoOrigem) return;
-
             const cx = parseFloat(c.dataset.x);
             const cy = parseFloat(c.dataset.y);
-
             if (estaProximo(pos, { x: cx, y: cy }, 12)) {
                 coracaoAlvo = c;
             }
@@ -760,14 +745,11 @@ body {
 
             if (conexoesPermitidas.includes(chave)) {
                 const linha = document.getElementById('linha-' + chave);
-
                 if (linha && !linha.classList.contains('ativa')) {
                     linha.classList.add('ativa');
                     coracaoOrigem.classList.add('aceso');
                     coracaoAlvo.classList.add('aceso');
-
                     conexoesFeitas++;
-
                     if (conexoesFeitas >= TOTAL_CONEXOES) {
                         setTimeout(function() {
                             abrirMensagem();
@@ -792,7 +774,6 @@ body {
         coracao.addEventListener('mousedown', function(e) {
             iniciarArrasto(this, e);
         });
-
         coracao.addEventListener('touchstart', function(e) {
             iniciarArrasto(this, e);
         }, { passive: false });
@@ -819,7 +800,6 @@ body {
     }
 
     fecharMensagem.addEventListener('click', fecharModal);
-
     modalMensagem.addEventListener('click', function(e) {
         if (e.target === modalMensagem) {
             fecharModal();
@@ -827,7 +807,6 @@ body {
     });
 
     console.log('🖤 Desculpa, meu anjo!');
-    console.log('🔗 Arraste de um coração até outro para conectar!');
 
 })();
 </script>
