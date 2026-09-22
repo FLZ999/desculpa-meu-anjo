@@ -47,10 +47,6 @@ body {
     forced-color-adjust: none;
 }
 
-/* =====================================================
-   LAYOUT PRINCIPAL
-===================================================== */
-
 .layout-principal {
     display: flex;
     justify-content: space-between;
@@ -234,6 +230,7 @@ body {
     z-index: 10;
     cursor: pointer;
     transition: transform 0.3s ease;
+    touch-action: none;
 }
 
 .coracao svg {
@@ -242,6 +239,7 @@ body {
     animation: pulsarCoracao 2s ease-in-out infinite;
     transition: filter 0.3s ease;
     forced-color-adjust: none;
+    pointer-events: none;
 }
 
 .coracao.vermelho svg {
@@ -271,7 +269,6 @@ body {
 
 .coracao.ativo svg {
     filter: brightness(1.6) !important;
-    transform: scale(1.15);
 }
 
 .coracao.errado svg {
@@ -290,7 +287,7 @@ body {
 }
 
 /* =====================================================
-   POSIÇÕES DOS 7 CORAÇÕES
+   POSIÇÕES
 ===================================================== */
 
 .c1 { top: 0%; left: 50%; transform: translate(-50%, 0); }
@@ -326,20 +323,19 @@ body {
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
-    color: rgba(255, 204, 213, 0.7);
+    color: rgba(255, 204, 213, 0.8);
     font-size: 13px;
     letter-spacing: 3px;
     z-index: 50;
     text-align: center;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     white-space: nowrap;
 }
 
-/* ✅ SÍMBOLO 𒉭 APÓS O TEXTO */
 .rodape .simbolo {
-    font-size: 20px;
+    font-size: 22px;
     color: #ff3b5c;
     text-shadow: 
         0 0 10px rgba(255, 23, 68, 0.9),
@@ -348,7 +344,6 @@ body {
     animation: pulsarSimbolo 2s ease-in-out infinite;
     display: inline-block;
     line-height: 1;
-    vertical-align: middle;
 }
 
 @keyframes pulsarSimbolo {
@@ -592,6 +587,7 @@ body {
 
     .rodape {
         font-size: 10px;
+        gap: 8px;
     }
 
     .rodape .simbolo {
@@ -719,61 +715,58 @@ body {
             <line class="linha" id="linha-6-7" x1="73" y1="67" x2="50" y2="85" />
         </svg>
 
-        <!-- VERMELHOS -->
         <div class="coracao vermelho c1" data-index="1" data-x="50" data-y="15">
-            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
+            <svg viewBox="0 0 100 100">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" style="fill: #ff1744 !important;" />
+                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.7)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
         <div class="coracao vermelho c2" data-index="2" data-x="27" data-y="33">
-            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
+            <svg viewBox="0 0 100 100">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" style="fill: #ff1744 !important;" />
+                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.7)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
         <div class="coracao vermelho c3" data-index="3" data-x="73" data-y="33">
-            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
+            <svg viewBox="0 0 100 100">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" style="fill: #ff1744 !important;" />
+                    fill="#ff1744" stroke="#ff5566" stroke-width="2.5" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.7)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <!-- AZUL -->
         <div class="coracao azul c4" data-index="4" data-x="50" data-y="50">
-            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
+            <svg viewBox="0 0 100 100">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#2196f3" stroke="#64b5f6" stroke-width="2.5" style="fill: #2196f3 !important;" />
+                    fill="#2196f3" stroke="#64b5f6" stroke-width="2.5" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.7)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
-        <!-- PRETOS -->
         <div class="coracao preto c5" data-index="5" data-x="27" data-y="67">
-            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
+            <svg viewBox="0 0 100 100">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#000000" stroke="#cccccc" stroke-width="3" style="fill: #000000 !important;" />
+                    fill="#000000" stroke="#cccccc" stroke-width="3" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
         <div class="coracao preto c6" data-index="6" data-x="73" data-y="67">
-            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
+            <svg viewBox="0 0 100 100">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#000000" stroke="#cccccc" stroke-width="3" style="fill: #000000 !important;" />
+                    fill="#000000" stroke="#cccccc" stroke-width="3" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
 
         <div class="coracao preto c7" data-index="7" data-x="50" data-y="85">
-            <svg viewBox="0 0 100 100" style="forced-color-adjust: none;">
+            <svg viewBox="0 0 100 100">
                 <path d="M50,88 C50,88 8,60 8,32 C8,15 22,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C78,5 92,15 92,32 C92,60 50,88 50,88 Z" 
-                    fill="#000000" stroke="#cccccc" stroke-width="3" style="fill: #000000 !important;" />
+                    fill="#000000" stroke="#cccccc" stroke-width="3" />
                 <ellipse cx="33" cy="28" rx="9" ry="13" fill="rgba(255,255,255,0.4)" transform="rotate(-25 33 28)" />
             </svg>
         </div>
@@ -790,7 +783,7 @@ body {
 
 </div>
 
-<!-- ✅ RODAPÉ COM SÍMBOLO 𒉭 -->
+<!-- RODAPÉ COM SÍMBOLO 𒉭 -->
 <div class="rodape" id="rodape">
     <span>arraste de um coração até outro para conectar</span>
     <span class="simbolo">𒉭</span>
@@ -818,6 +811,10 @@ body {
 <script>
 (function() {
     'use strict';
+
+    // =====================================================
+    // ZOOM NAS FOTOS
+    // =====================================================
 
     const zoomFoto = document.getElementById('zoomFoto');
     const fotoAmpliada = document.getElementById('fotoAmpliada');
@@ -855,6 +852,10 @@ body {
         }
     });
 
+    // =====================================================
+    // JOGO DOS CORAÇÕES
+    // =====================================================
+
     const conexoesPermitidas = [
         '1-2', '1-3',
         '2-4', '3-4',
@@ -866,7 +867,6 @@ body {
 
     const container = document.getElementById('simboloContainer');
     const coracoes = document.querySelectorAll('.coracao');
-    const rodape = document.getElementById('rodape');
     const modalMensagem = document.getElementById('modalMensagem');
     const fecharMensagem = document.getElementById('fecharMensagem');
     const linhaPreview = document.getElementById('linhaPreview');
@@ -891,4 +891,146 @@ body {
         }
 
         const x = ((clientX - rect.left) / rect.width) * 100;
-        const y =
+        const y = ((clientY - rect.top) / rect.height) * 100;
+
+        return { x, y };
+    }
+
+    function estaProximo(p1, p2, tolerancia = 10) {
+        const dx = Math.abs(p1.x - p2.x);
+        const dy = Math.abs(p1.y - p2.y);
+        return dx < tolerancia && dy < tolerancia;
+    }
+
+    function gerarChave(i1, i2) {
+        const menor = Math.min(i1, i2);
+        const maior = Math.max(i1, i2);
+        return menor + '-' + maior;
+    }
+
+    function iniciarArrasto(coracao, e) {
+        e.preventDefault();
+        e.stopPropagation();
+        coracaoOrigem = coracao;
+        arrastando = true;
+        coracao.classList.add('ativo');
+
+        const x1 = parseFloat(coracao.dataset.x);
+        const y1 = parseFloat(coracao.dataset.y);
+
+        linhaPreview.setAttribute('x1', x1);
+        linhaPreview.setAttribute('y1', y1);
+        linhaPreview.setAttribute('x2', x1);
+        linhaPreview.setAttribute('y2', y1);
+        linhaPreview.classList.add('ativa');
+    }
+
+    function moverArrasto(e) {
+        if (!arrastando || !coracaoOrigem) return;
+        e.preventDefault();
+
+        const pos = getPosicaoRelativa(e);
+        linhaPreview.setAttribute('x2', pos.x);
+        linhaPreview.setAttribute('y2', pos.y);
+
+        coracoes.forEach(function(c) {
+            if (c === coracaoOrigem) return;
+            const cx = parseFloat(c.dataset.x);
+            const cy = parseFloat(c.dataset.y);
+            if (estaProximo(pos, { x: cx, y: cy }, 12)) {
+                c.classList.add('ativo');
+            } else {
+                c.classList.remove('ativo');
+            }
+        });
+    }
+
+    function finalizarArrasto(e) {
+        if (!arrastando || !coracaoOrigem) return;
+        e.preventDefault();
+
+        const pos = getPosicaoRelativa(e);
+        let coracaoAlvo = null;
+
+        coracoes.forEach(function(c) {
+            c.classList.remove('ativo');
+            if (c === coracaoOrigem) return;
+            const cx = parseFloat(c.dataset.x);
+            const cy = parseFloat(c.dataset.y);
+            if (estaProximo(pos, { x: cx, y: cy }, 12)) {
+                coracaoAlvo = c;
+            }
+        });
+
+        if (coracaoAlvo) {
+            const idx1 = parseInt(coracaoOrigem.dataset.index);
+            const idx2 = parseInt(coracaoAlvo.dataset.index);
+            const chave = gerarChave(idx1, idx2);
+
+            if (conexoesPermitidas.includes(chave)) {
+                const linha = document.getElementById('linha-' + chave);
+                if (linha && !linha.classList.contains('ativa')) {
+                    linha.classList.add('ativa');
+                    conexoesFeitas++;
+                    if (conexoesFeitas >= TOTAL_CONEXOES) {
+                        setTimeout(function() {
+                            abrirMensagem();
+                        }, 700);
+                    }
+                }
+            } else {
+                coracaoAlvo.classList.add('errado');
+                setTimeout(function() {
+                    coracaoAlvo.classList.remove('errado');
+                }, 400);
+            }
+        }
+
+        coracaoOrigem.classList.remove('ativo');
+        linhaPreview.classList.remove('ativa');
+        coracaoOrigem = null;
+        arrastando = false;
+    }
+
+    coracoes.forEach(function(coracao) {
+        coracao.addEventListener('mousedown', function(e) {
+            iniciarArrasto(this, e);
+        });
+        coracao.addEventListener('touchstart', function(e) {
+            iniciarArrasto(this, e);
+        }, { passive: false });
+    });
+
+    document.addEventListener('mousemove', moverArrasto);
+    document.addEventListener('mouseup', finalizarArrasto);
+    document.addEventListener('touchmove', moverArrasto, { passive: false });
+    document.addEventListener('touchend', finalizarArrasto, { passive: false });
+
+    function abrirMensagem() {
+        modalMensagem.style.display = 'flex';
+        void modalMensagem.offsetWidth;
+        modalMensagem.classList.add('ativo');
+    }
+
+    function fecharModal() {
+        modalMensagem.style.animation = 'fadeIn 0.3s ease reverse';
+        setTimeout(function() {
+            modalMensagem.classList.remove('ativo');
+            modalMensagem.style.display = 'none';
+        }, 300);
+    }
+
+    fecharMensagem.addEventListener('click', fecharModal);
+    modalMensagem.addEventListener('click', function(e) {
+        if (e.target === modalMensagem) {
+            fecharModal();
+        }
+    });
+
+    console.log('🖤 Desculpa, meu anjo!');
+
+})();
+</script>
+
+</body>
+</html>
