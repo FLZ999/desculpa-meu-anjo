@@ -783,7 +783,6 @@ body {
 
 </div>
 
-<!-- RODAPÉ COM SÍMBOLO 𒉭 -->
 <div class="rodape" id="rodape">
     <span>arraste de um coração até outro para conectar</span>
     <span class="simbolo">𒉭</span>
@@ -794,15 +793,26 @@ body {
     <img src="" alt="Foto ampliada" id="fotoAmpliada">
 </div>
 
+<!-- MODAL DE MENSAGEM COM O TEXTO PRONTO -->
 <div class="modal-mensagem" id="modalMensagem">
     <div class="modal-mensagem-box">
         <span class="modal-mensagem-heart">🖤</span>
         <div class="mensagem-texto">
             Desculpa, meu anjo...
             <br><br>
-            Escreva aqui a sua mensagem...
+            Olha meu amor, eu errei muito com você. Não me orgulho do que eu fiz e não achei nada justo. Deixei meu "ego e raiva" me consumir. Eu fiz algo que me arrependi muito, e fiquei pensando como fazer o presente e a cartinha pra você. Espero que você realmente goste. S2
             <br><br>
-            <span class="destaque">Com todo meu amor.</span>
+            OIEEE MEU AMOR, se posso ter a mínima oportunidade de chamar você disso ainda, fiz um erro gigante com você, algo que poderia se resolver normalmente, que era só falar, só ter conversado. Mas eu não fiz a minha parte e fui alguém totalmente imaturo. Na hora eu pensei que estava certo em fazer isso, que foi você a errada... mas depois de nos "entendermos" vi que eu estava muito errado e sem razão praticamente.
+            <br><br>
+            Você tinha sumido o dia inteiro. Quando lhe vejo pela primeira vez no dia, você estava com o seu melhor amigo, mas isso é algo normal. Mas quando eu vi... eu tinha enlouquecido da cabeça. Pensando no que eu fiz de errado, pensando que eu fui perfeito para você, que não tive falhas, que fui alguém perfeito pra você. Mas antes eu era. Depois desse acontecimento, devo ser quase nada para você, eu acho ao menos. Não sei se mereço seu amor ainda, mas eu quero fazer por merecer.
+            <br><br>
+            Eu gosto muito de você, muito mesmo. Você não tem ideia de quanto eu gosto de você e o que eu quero ter com você no futuro, se nós ficarmos juntos até lá. Mesmo que demore pra termos algo "real", eu quero esperar você. Não quero uma garota que seja um momento ou que dure muito tempo, quero você, que possa realmente durar pra vida toda. Quero desfrutar minha vida com você.
+            <br><br>
+            Eu te amo muito, muito mesmo, e fico me pensando em todos os dias como seria a gente juntos, como seria eu e você dormindo juntos ou fazendo qualquer outra coisa.
+            <br><br>
+            <span class="destaque">Eu te amo muito, MUITO MESMO... 🖤</span>
+            <br><br>
+            <span class="destaque">Com amor, Bryan 🖤</span>
         </div>
         <button class="modal-mensagem-btn" id="fecharMensagem">💕 FECHAR</button>
     </div>
@@ -811,10 +821,6 @@ body {
 <script>
 (function() {
     'use strict';
-
-    // =====================================================
-    // ZOOM NAS FOTOS
-    // =====================================================
 
     const zoomFoto = document.getElementById('zoomFoto');
     const fotoAmpliada = document.getElementById('fotoAmpliada');
@@ -851,10 +857,6 @@ body {
             fecharZoomFoto();
         }
     });
-
-    // =====================================================
-    // JOGO DOS CORAÇÕES
-    // =====================================================
 
     const conexoesPermitidas = [
         '1-2', '1-3',
